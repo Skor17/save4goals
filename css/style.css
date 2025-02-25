@@ -2,15 +2,20 @@
 :root {
     --primary-color: #4361ee;
     --primary-light: #4895ef;
+    --primary-dark: #3a56d4;
     --success-color: #4cc9f0;
     --warning-color: #f72585;
     --light-bg: #f8f9fa;
+    --light-card: #ffffff;
     --light-text: #212529;
     --dark-bg: #121212;
     --dark-card: #1e1e1e;
     --dark-text: #e9ecef;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.15);
     --transition: all 0.3s ease;
+    --border-radius: 10px;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 * {
@@ -20,9 +25,11 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-main);
     line-height: 1.6;
     transition: var(--transition);
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 100% 30px;
 }
 
 .light-mode {
@@ -33,6 +40,7 @@ body {
 .dark-mode {
     background-color: var(--dark-bg);
     color: var(--dark-text);
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
 }
 
 .container {
@@ -44,9 +52,9 @@ body {
 
 /* Header */
 header {
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     box-shadow: var(--shadow);
-    background-color: white;
+    background-color: var(--light-card);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -62,9 +70,47 @@ header .container {
     align-items: center;
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
 .highlight {
     color: var(--primary-color);
     font-weight: 700;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--light-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.dark-mode .social-links a {
+    color: var(--dark-text);
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+}
+
+.social-links i {
+    font-size: 1.2rem;
 }
 
 .theme-toggle button {
@@ -74,10 +120,23 @@ header .container {
     cursor: pointer;
     color: var(--light-text);
     transition: var(--transition);
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .dark-mode .theme-toggle button {
     color: var(--dark-text);
+}
+
+.dark-mode .theme-toggle button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Main Content */
@@ -92,6 +151,7 @@ section {
 h2 {
     margin-bottom: 1rem;
     color: var(--primary-color);
+    font-weight: 600;
 }
 
 .dark-mode h2 {
@@ -107,16 +167,23 @@ h2 {
 }
 
 .summary-card {
-    background-color: white;
-    border-radius: 8px;
+    background-color: var(--light-card);
+    border-radius: var(--border-radius);
     padding: 1.5rem;
     box-shadow: var(--shadow);
     text-align: center;
     transition: var(--transition);
+    border-top: 4px solid var(--primary-color);
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
 }
 
 .dark-mode .summary-card {
     background-color: var(--dark-card);
+    border-top: 4px solid var(--primary-light);
 }
 
 .summary-card h3 {
@@ -141,8 +208,8 @@ h2 {
 
 /* Form Styles */
 .add-goal {
-    background-color: white;
-    border-radius: 8px;
+    background-color: var(--light-card);
+    border-radius: var(--border-radius);
     padding: 1.5rem;
     box-shadow: var(--shadow);
 }
@@ -165,7 +232,7 @@ input {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 1rem;
     transition: var(--transition);
 }
@@ -188,7 +255,7 @@ input:focus {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 500;
@@ -196,8 +263,16 @@ input:focus {
 }
 
 .btn:hover {
-    background-color: var(--primary-light);
+    background-color: var(--primary-dark);
     transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
 }
 
 .btn-small {
@@ -205,16 +280,25 @@ input:focus {
     font-size: 0.9rem;
 }
 
-/* Goals List */
-.goals-list {
-    background-color: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
+.btn-add {
+    background-color: #2ecc71;
 }
 
-.dark-mode .goals-list {
-    background-color: var(--dark-card);
+.btn-add:hover {
+    background-color: #27ae60;
+}
+
+.btn-subtract {
+    background-color: #e74c3c;
+}
+
+.btn-subtract:hover {
+    background-color: #c0392b;
+}
+
+/* Goals List */
+.goals-list {
+    margin-top: 2rem;
 }
 
 .section-header {
@@ -229,34 +313,51 @@ input:focus {
     gap: 0.5rem;
 }
 
+#goals-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
 .empty-state {
+    grid-column: 1 / -1;
     text-align: center;
-    padding: 3rem 0;
+    padding: 3rem 1rem;
+    color: #6c757d;
+}
+
+.dark-mode .empty-state {
     color: #adb5bd;
 }
 
 .empty-state i {
     font-size: 3rem;
     margin-bottom: 1rem;
+    color: var(--primary-light);
 }
 
-/* Goal Card */
+/* Goal Cards */
 .goal-card {
-    background-color: #f8f9fa;
-    border-radius: 8px;
+    background-color: var(--light-card);
+    border-radius: var(--border-radius);
     padding: 1.5rem;
     margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow);
     transition: var(--transition);
+    border-left: 4px solid var(--primary-color);
+    width: 100%;
+    display: block;
 }
 
 .dark-mode .goal-card {
-    background-color: #2a2a2a;
+    background-color: var(--dark-card);
+    border-left: 4px solid var(--primary-light);
 }
 
 .goal-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-hover);
 }
 
 .goal-header {
@@ -267,8 +368,16 @@ input:focus {
 }
 
 .goal-title h3 {
-    font-size: 1.2rem;
     margin-bottom: 0.25rem;
+}
+
+.goal-title small {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.dark-mode .goal-title small {
+    color: #adb5bd;
 }
 
 .goal-actions {
@@ -283,14 +392,15 @@ input:focus {
     cursor: pointer;
     color: #6c757d;
     transition: var(--transition);
+    padding: 0.25rem;
+}
+
+.dark-mode .goal-actions button {
+    color: #adb5bd;
 }
 
 .goal-actions button:hover {
     color: var(--primary-color);
-}
-
-.dark-mode .goal-actions button:hover {
-    color: var(--primary-light);
 }
 
 .goal-progress {
@@ -306,7 +416,7 @@ input:focus {
 }
 
 .dark-mode .progress-bar {
-    background-color: #444;
+    background-color: #2a2a2a;
 }
 
 .progress-fill {
@@ -331,42 +441,20 @@ input:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e9ecef;
 }
 
-.dark-mode .goal-footer {
-    border-top-color: #444;
+.goal-remaining {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.dark-mode .goal-remaining {
+    color: #adb5bd;
 }
 
 .goal-actions-primary {
     display: flex;
     gap: 0.5rem;
-}
-
-.goal-actions-primary button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: var(--transition);
-}
-
-.btn-add {
-    background-color: var(--success-color);
-    color: white;
-}
-
-.btn-subtract {
-    background-color: var(--warning-color);
-    color: white;
-}
-
-.btn-details {
-    background-color: var(--primary-color);
-    color: white;
 }
 
 /* Modal */
@@ -380,13 +468,14 @@ input:focus {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
     background-color: white;
     margin: 10% auto;
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     width: 80%;
     max-width: 800px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -440,6 +529,12 @@ input:focus {
     background-color: #f8f9fa;
     padding: 1rem;
     border-radius: 8px;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
 }
 
 .dark-mode .stat-card {
@@ -464,6 +559,13 @@ input:focus {
 .chart-container {
     margin-bottom: 2rem;
     height: 300px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.dark-mode .chart-container {
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .transactions-header {
@@ -476,6 +578,13 @@ input:focus {
 .transaction-list {
     max-height: 300px;
     overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.dark-mode .transaction-list {
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .transaction-item {
@@ -483,10 +592,19 @@ input:focus {
     justify-content: space-between;
     padding: 1rem;
     border-bottom: 1px solid #e9ecef;
+    transition: var(--transition);
+}
+
+.transaction-item:hover {
+    background-color: rgba(0, 0, 0, 0.02);
 }
 
 .dark-mode .transaction-item {
     border-bottom-color: #444;
+}
+
+.dark-mode .transaction-item:hover {
+    background-color: rgba(255, 255, 255, 0.02);
 }
 
 .transaction-date {
@@ -521,15 +639,82 @@ input:focus {
 
 /* Footer */
 footer {
-    text-align: center;
+    background-color: var(--light-card);
     padding: 2rem 0;
-    margin-top: 2rem;
+    margin-top: 3rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode footer {
+    background-color: var(--dark-card);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.footer-logo-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.creator-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+footer p {
     color: #6c757d;
     font-size: 0.9rem;
 }
 
-.dark-mode footer {
+.dark-mode footer p {
     color: #adb5bd;
+}
+
+.social-credit {
+    margin-top: 0.5rem;
+}
+
+.creator-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background-color: rgba(67, 97, 238, 0.1);
+}
+
+.dark-mode .creator-link {
+    background-color: rgba(67, 97, 238, 0.2);
+}
+
+.creator-link:hover {
+    color: white;
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.creator-link i {
+    font-size: 1.1rem;
 }
 
 /* Responsive */
@@ -546,4 +731,276 @@ footer {
     .goal-details-stats {
         grid-template-columns: 1fr;
     }
+    
+    .social-links span {
+        display: none;
+    }
+    
+    .header-actions {
+        gap: 10px;
+    }
+    
+    .goal-card {
+        padding: 1rem;
+    }
+}
+
+/* Money Form */
+.money-form-container {
+    padding: 1rem;
+}
+
+.money-form-container h2 {
+    margin-bottom: 0.5rem;
+}
+
+.money-form-container p {
+    margin-bottom: 1.5rem;
+    color: #6c757d;
+}
+
+.dark-mode .money-form-container p {
+    color: #adb5bd;
+}
+
+.money-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.amount-input-container {
+    position: relative;
+}
+
+.currency-symbol {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.amount-input-container input {
+    padding-left: 25px;
+    font-size: 1.2rem;
+    height: 50px;
+}
+
+.quick-amounts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.quick-amount {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dark-mode .quick-amount {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: var(--dark-text);
+}
+
+.quick-amount:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+}
+
+.dark-mode .quick-amount:hover {
+    background-color: #333;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-cancel {
+    background-color: #6c757d;
+}
+
+.btn-cancel:hover {
+    background-color: #5a6268;
+}
+
+/* Edit Goal Form */
+.edit-form-container {
+    padding: 1rem;
+}
+
+.edit-form-container h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.edit-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.edit-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.edit-form label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.edit-form input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.dark-mode .edit-form input {
+    background-color: #333;
+    border-color: #444;
+    color: var(--dark-text);
+}
+
+.edit-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+/* Logo fallback */
+.logo-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+/* Goal Card Action Buttons */
+.goal-actions-primary .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.goal-actions-primary .btn i {
+    font-size: 1rem;
+}
+
+.btn-add {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+}
+
+.btn-add:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-subtract {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+}
+
+.btn-subtract:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-details {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.btn-details:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Add Goal Button */
+#add-goal-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+#add-goal-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Add Goal Form */
+.add-goal-form-container {
+    padding: 1rem;
+}
+
+.add-goal-form-container h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.add-goal-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.add-goal-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.add-goal-form label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.add-goal-form input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.dark-mode .add-goal-form input {
+    background-color: #333;
+    border-color: #444;
+    color: var(--dark-text);
+}
+
+.add-goal-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
 } 
