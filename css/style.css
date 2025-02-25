@@ -768,23 +768,26 @@ footer p {
     margin: 0 auto;
 }
 
+/* Form Input Styling */
 .amount-input-container {
     position: relative;
 }
 
 .currency-symbol {
     position: absolute;
-    left: 12px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
     color: #6c757d;
-    font-weight: 500;
+    z-index: 1;
+}
+
+.dark-mode .currency-symbol {
+    color: #adb5bd;
 }
 
 .amount-input-container input {
-    padding-left: 25px;
-    font-size: 1.2rem;
-    height: 50px;
+    padding-left: 25px !important; /* Add more padding to accommodate the $ symbol */
 }
 
 .quick-amounts {
