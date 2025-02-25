@@ -347,7 +347,9 @@ input:focus {
     transition: var(--transition);
     border-left: 4px solid var(--primary-color);
     width: 100%;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .dark-mode .goal-card {
@@ -454,7 +456,14 @@ input:focus {
 
 .goal-actions-primary {
     display: flex;
-    gap: 0.5rem;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.goal-actions-primary .btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 0.5rem;
 }
 
 /* Modal */
@@ -742,6 +751,14 @@ footer p {
     
     .goal-card {
         padding: 1rem;
+    }
+
+    .goal-actions-primary {
+        flex-direction: column;
+    }
+
+    .goal-actions-primary .btn {
+        margin: 5px 0;
     }
 }
 
